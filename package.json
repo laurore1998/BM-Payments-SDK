@@ -1,0 +1,24 @@
+{
+  "name": "bm-payments-sdk",
+  "version": "1.0.0",
+  "description": "SDK for the devfundme API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurore1998/BM-Payments-SDK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurore1998/BM-Payments-SDK/issues"
+  },
+  "homepage": "https://github.com/laurore1998/BM-Payments-SDK#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
