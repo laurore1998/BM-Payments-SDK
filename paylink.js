@@ -15,25 +15,41 @@ function generatePaylink(apiToken, amount, note, returnUrl, metaData, payorName,
         payor_email: payorEmail || '',
     };
 
-    axios.post(url, data, { headers })
-        .then(response => {
-            console.log(response.data);
-        })
-        .catch(error => {
-            if (error.response) {
-                console.error(`Error: ${error.response.status} - ${error.response.data.message}`);
-            } else {
-                console.error(`Error: ${error.message}`);
-            }
-        });
+    return axios.post(url, data, { headers })
+        .then(response => response.data)
+        .catch(error => handleRequestError(error));
 }
 
-const apiToken = 'YOUR_API_TOKEN';
-const amount = 100;
-const note = 'Information about the transaction';
-const returnUrl = 'https://your_website_redirect_url/';
-const metaData = null;
-const payorName = ''; 
-const payorEmail = ''; 
+function getPaylinks(apiToken) {
+    const url = 'https://devfundme.com/api/pms/paylink/';
+    const headers = {
+        'Authorization': `Token ${apiToken}`,
+        'Content-Type': 'application/json',
+    };
 
-generatePaylink(apiToken, amount, note, returnUrl, metaData, payorName, payorEmail);
+    return axios.get(url, { headers })
+        .then(response => response.data)
+        .catch(error => handleRequestError(error));
+}
+
+function handleRequestError(error) {
+    if (error.response) {
+        throw new Error(`Request failed with status ${error.response.status} - ${error.response.data.message}`);
+    } else if (error.request) {
+        throw new Error('Request made but no response received');
+    } else {
+        throw new Error(`Error: ${error.message}`);
+    }
+}
+
+// pati sa se pati pou teste metod nou gen anle yo
+const apiToken = 'YOUR_API_TOKEN';
+
+
+generatePaylink(apiToken, 100, 'Information about the transaction', 'http://example.com/pms/service/')
+    .then(response => console.log('Generated Paylink:', response))
+    .catch(error => console.error(error.message));
+
+getPaylinks(apiToken)
+    .then(response => console.log('Paylinks:', response))
+    .catch(error => console.error(error.message));
