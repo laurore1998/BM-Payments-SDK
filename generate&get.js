@@ -1,5 +1,24 @@
 const axios = require('axios');
 
+function isValidUrl(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function isValidNumber(value) {
+    return typeof value === 'number' && !isNaN(value) && isFinite(value);
+}
+
+function isValidEmail(email) {
+    // This is a simple email validation regex; adjust as needed
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 function generatePaylink(apiToken, amount, note, returnUrl, metaData = {}, payorName, payorEmail) {
     const url = 'https://devfundme.com/api/pms/generate_paylink/';
     const headers = {
@@ -11,12 +30,30 @@ function generatePaylink(apiToken, amount, note, returnUrl, metaData = {}, payor
         throw new Error('metaData cannot be null.');
     }
 
-    if (!payorName || payorName.trim() === '') {
-        throw new Error('payorName cannot be blank.');
+    if (!isValidUrl(returnUrl)) {
+        throw new Error('returnUrl must be a valid URL.');
     }
 
-    if (!payorEmail || payorEmail.trim() === '') {
-        throw new Error('payorEmail cannot be blank.');
+    if (typeof metaData !== 'object') {
+        throw new Error('metaData must be an object.');
+    }
+
+    try {
+        JSON.stringify(metaData);
+    } catch (error) {
+        throw new Error('metaData must be a valid JSON object.');
+    }
+
+    if (!isValidNumber(amount)) {
+        throw new Error('amount must be a number.');
+    }
+
+    if (typeof payorName !== 'string') {
+        throw new Error('payorName must be a string.');
+    }
+
+    if (!isValidEmail(payorEmail)) {
+        throw new Error('payorEmail must be a valid email address.');
     }
 
     const data = {
@@ -32,6 +69,7 @@ function generatePaylink(apiToken, amount, note, returnUrl, metaData = {}, payor
         .then(response => response.data)
         .catch(error => handleRequestError(error));
 }
+
 
 
 
@@ -51,7 +89,6 @@ function handleRequestError(error) {
     if (error.response) {
         console.error(`Request failed with status ${error.response.status}`);
         console.error('Response data:', error.response.data);
-        console.error('Response headers:', error.response.headers);
         throw new Error(`Request failed with status ${error.response.status} - ${error.response.data.message || 'No error message available'}`);
     } else if (error.request) {
         console.error('Request made but no response received');
@@ -63,15 +100,7 @@ function handleRequestError(error) {
     }
 }
 
-// pati sa se pati pou teste metod nou gen anle yo, gen 
-// token: 022e13ff53db887c2e515ec266768e4e305e34b7
-const apiToken = '022e13ff53db887c2e515ec266768e4e305e34b7';
-
-
-generatePaylink(apiToken, 100, 'Test note', 'http://example.com/pms/service/', {}, 'ti mamoun', 'janwobe@example.com')
-    .then(response => console.log('Generated Paylink:', response))
-    .catch(error => console.error(error.message));
-
-// getPaylinks(apiToken)
-//     .then(response => console.log('Paylinks:', response))
-//     .catch(error => console.error(error.message));
+module.exports={
+    generatePaylink,
+    getPaylinks,
+}
