@@ -1,19 +1,11 @@
 # BM-Payments-SDK
-SDK for the devfundme API
-
-Certainly! Creating documentation typically involves providing clear and concise information about how to use the SDK, including details on the available functions, parameters, and usage examples. Below is a basic template for your SDK documentation:
-
-markdown
-
-# DevFundMe SDK Documentation
-
-The Dev SDK provides a set of functions to interact with the DevFundMe API. This documentation outlines the available functions and their usage.
+This SDK provides a set of functions to interact with the DevFundMe API. This documentation outlines the available functions and their usage.
 
 ## Installation
 
 Install the SDK in your project using npm:
 
-npm install
+npm install bm-payments-sdk
 
 ##Usage
 Initialize the SDK
