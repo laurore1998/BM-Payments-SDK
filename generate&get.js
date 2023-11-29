@@ -14,7 +14,6 @@ function isValidNumber(value) {
 }
 
 function isValidEmail(email) {
-    // This is a simple email validation regex; adjust as needed
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
@@ -65,9 +64,14 @@ function generatePaylink(apiToken, amount, note, returnUrl, metaData = {}, payor
         payor_email: payorEmail,
     };
 
+
     return axios.post(url, data, { headers })
-        .then(response => response.data)
-        .catch(error => handleRequestError(error));
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw handleRequestError(error);
+        });
 }
 
 
