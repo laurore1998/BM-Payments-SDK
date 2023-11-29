@@ -19,6 +19,7 @@ const apiToken = 'YOUR_API_TOKEN';
 Generates a paylink for a transaction.
 
     Parameters:
+        apiToken: the token of the api
         amount (Number): The transaction amount.
         note (String): Information about the transaction.
         return_Url [String(url formatted)]: The URL to redirect to after the transaction.
@@ -29,7 +30,7 @@ Generates a paylink for a transaction.
     Example:
 
     try {
-        const generate = devSDK.generatePaylink(100, 'Transaction note', 'https://example.com/return', {}, 'John Doe', 'john@example.com');
+        const generate = devSDK.generatePaylink(apiToken, 100, 'Transaction note', 'https://example.com/return', {}, 'John Doe', 'john@example.com');
         console.log('Generated Paylink:', paylink);
     } catch (error) {
         console.error('Error generating Paylink:', error.message);
