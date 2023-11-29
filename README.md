@@ -17,7 +17,7 @@ npm install
 
 ##Usage
 Initialize the SDK
-const devSDK = require('./generate&get');
+const devSDK = require('bm-payments-sdk');
 const apiToken = 'YOUR_API_TOKEN';
 
 #Functions
