@@ -7,15 +7,15 @@ Install the SDK in your project using npm:
 
 npm install bm-payments-sdk
 
-##Usage
+Usage
 
 Initialize the SDK
 const devSDK = require('bm-payments-sdk');
 const apiToken = 'YOUR_API_TOKEN';
 
-#Function
+Function
 
-##generatePaylink(amount, note, returnUrl, metaData, payorName, payorEmail)
+generatePaylink(apiToken, amount, note, returnUrl, metaData, payorName, payorEmail)
 Generates a paylink for a transaction.
 
     Parameters:
