@@ -38,7 +38,7 @@ Generates a paylink for a transaction.
         console.error('Error generating Paylink:', error.message);
     }
 
-##getPaylinks()
+getPaylinks()
 Retrieves a list of all generated paylinks.
 
     Example:
