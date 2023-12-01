@@ -4,13 +4,13 @@ This SDK provides a set of functions to interact with the DevFundMe API. This do
 ## Installation
 
 Install the SDK in your project using npm:
-
 npm install bm-payments-sdk
 
 Usage
-
 Initialize the SDK
+
 const devSDK = require('bm-payments-sdk');
+
 const apiToken = 'YOUR_API_TOKEN';
 
 Function
