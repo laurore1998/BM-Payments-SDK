@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { generatePaylink, getPaylinks } = require('./generate&get');
 
-//const mockApiToken = require('./utils');
+const mockApiToken = require('./utils');
 
 describe('DevFundMe SDK Functions', function () {
   this.timeout(5000); // 5000ms or 5 seconds
